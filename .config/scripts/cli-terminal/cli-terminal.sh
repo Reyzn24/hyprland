@@ -1,4 +1,7 @@
 #!/bin/bash
+
+clear
+
 set -e  # Para o script se qualquer comando falhar
 
 # Verifica se o usuário está usando uma distribuição baseada em Arch
