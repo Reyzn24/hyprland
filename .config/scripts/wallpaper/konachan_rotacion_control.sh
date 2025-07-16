@@ -72,7 +72,7 @@ if [[ "$RATING" != "explicit" ]]; then
 fi
 
 # Aplicando wallpaper
-caelestia wallpaper -f "$downloadPath"
+# caelestia wallpaper -f "$downloadPath"
 
 swww img "$downloadPath" $TRANSITION_TYPE $TRANSITION_POS $TRANSITION_FPS $TRANSITION_DURATION
 
