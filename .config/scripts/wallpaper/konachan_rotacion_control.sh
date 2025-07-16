@@ -5,10 +5,10 @@ STATE_FILE="$HOME/.cache/last_wallpaper_rating"
 mkdir -p "$(dirname "$STATE_FILE")"
 
 # Define o tipo de transição ao aplicar o wallpaper
-#TRANSITION_TYPE="--transition-type wipe"
-#TRANSITION_POS="--transition-pos 1,0"
-#TRANSITION_FPS="--transition-fps 60"
-#TRANSITION_DURATION="--transition-duration 5" 
+TRANSITION_TYPE="--transition-type wipe"
+TRANSITION_POS="--transition-pos 1,0"
+TRANSITION_FPS="--transition-fps 60"
+TRANSITION_DURATION="--transition-duration 2" 
 
 # Tipos de animações
 # grow, fade, wipe, outer e none
@@ -72,13 +72,12 @@ if [[ "$RATING" != "explicit" ]]; then
 fi
 
 # Aplicando wallpaper
-caelestia wallpaper -p "$downloadPath"
 caelestia wallpaper -f "$downloadPath"
 
-#swww img "$downloadPath" $TRANSITION_TYPE $TRANSITION_POS $TRANSITION_FPS $TRANSITION_DURATION
+swww img "$downloadPath" $TRANSITION_TYPE $TRANSITION_POS $TRANSITION_FPS $TRANSITION_DURATION
 
 # Som de notificação
-[ -f ~/.config/sound/Message.mp3 ] && paplay ~/.config/sound/Message.mp3 &
+# [ -f ~/.config/sound/Message.mp3 ] && paplay ~/.config/sound/Message.mp3 &
 
 # Notificação
 notify-send "✨ Wallpaper aplicado!" "Konachan ($RATING)"
