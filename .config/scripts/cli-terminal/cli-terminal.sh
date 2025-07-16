@@ -7,9 +7,23 @@ if ! command -v pacman &>/dev/null; then
     exit 1
 fi
 
-# Instala dependências
-echo "Instalando Node.js e npm..."
-sudo pacman -Sy --noconfirm nodejs npm
+# Verifica se node.js e npm estão instalados
+if ! command -v node >/dev/null || ! command -v npm >/dev/null; then
+  echo "nodejs npm não encontrados."
+  read -p "Deseja instalar Node.js npm agora? (s/n): " resposta
+  if [[ "$resposta" =~ ^[Ss]$ ]]; then
+    echo "Instalando Node.js e npm..."
+    sudo pacman -S --noconfirm nodejs npm
+    if [ $? -ne 0 ]; then
+      echo "Falha na instalação de Node.js e npm. Abortando."
+      exit 1
+    fi
+  else
+    echo "Node.js e npm são necessarios para o funcionamento do script. Abortando."
+    exit 1
+  fi
+fi
+
 
 # Configura diretório global do npm
 echo "Configurando npm para uso global sem sudo..."
@@ -62,7 +76,7 @@ select ACTION in "Instalar" "Desinstalar"; do
         Instalar)
             echo ""
             echo "Qual CLI você deseja instalar?"
-            select CHOICE in "Gemini (Google)" "Claude (Anthropic)"; do
+            select CHOICE in "Gemini (Google)" "Claude (Anthropic)" "Ollama Offline"; do
                 case $REPLY in
                     1)
                         echo "Instalando Gemini CLI..."
@@ -76,8 +90,46 @@ select ACTION in "Instalar" "Desinstalar"; do
                         echo "Claude CLI instalado com sucesso!"
                         break
                         ;;
+                    3)
+                        echo "Executando o instalador Ollama (install.sh)"
+                        curl -fsSL https://ollama.com/install.sh | sh
+                        echo "Qual modelo offile você quer instalar?"
+                        select OLLAMA in "gemma:2b" "gemma:7b" "mistral" "codellama" "llama3"; do
+                            case $REPLY in
+                                1)
+                                    echo "Instalando gemma:2b..."
+                                    ollama run gemma:2b
+                                    break
+                                    ;;
+                                2)
+                                    echo "Instalando gemma:7b..."
+                                    ollama run gemma:7b
+                                    break
+                                    ;;
+                                3)
+                                    echo "Instalando mistral..."
+                                    ollama run mistral
+                                    break
+                                    ;;
+                                4)
+                                    echo "Instalando codellama..."
+                                    ollama run codellama
+                                    break
+                                    ;;
+                                5)
+                                    echo "Instalando llama3..."
+                                    ollama run llama3
+                                    break
+                                    ;; 
+                                *)
+                                    echo "Opção invalida escolha um numero de 1 A 5."
+                                    ;;
+                            esac
+                        done
+                        break
+                        ;;
                     *)
-                        echo "Opção inválida. Escolha 1 ou 2."
+                        echo "Opção inválida. Escolha 1, 2 ou 3."
                         ;;
                 esac
             done
