@@ -5,14 +5,19 @@ STATE_FILE="$HOME/.cache/last_wallpaper_rating"
 mkdir -p "$(dirname "$STATE_FILE")"
 
 # Define o tipo de transição ao aplicar o wallpaper
-#TRANSITION_TYPE="--transition-type outer"
-#TRANSITION_POS="--transition-pos 0.5,0.5"
+#TRANSITION_TYPE="--transition-type wipe"
+#TRANSITION_POS="--transition-pos 1,0"
 #TRANSITION_FPS="--transition-fps 60"
-#TRANSITION_DURATION="--transition-duration 1" 
+#TRANSITION_DURATION="--transition-duration 5" 
 
 # Tipos de animações
 # grow, fade, wipe, outer e none
 
+# Tipos de posição da transição
+# 0.5,0.5 = centro
+# 0,0 = canto superior esquerdo
+# 1,1 = canto inferior direito
+# 1,0 = canto superior direito
 
 # Lê o último tipo usado
 if [[ -f "$STATE_FILE" ]]; then
@@ -67,9 +72,10 @@ if [[ "$RATING" != "explicit" ]]; then
 fi
 
 # Aplicando wallpaper
+caelestia wallpaper -p "$downloadPath"
 caelestia wallpaper -f "$downloadPath"
 
-# swww img "$downloadPath" $TRANSITION_TYPE $TRANSITION_POS $TRANSITION_FPS $TRANSITION_DURATION
+#swww img "$downloadPath" $TRANSITION_TYPE $TRANSITION_POS $TRANSITION_FPS $TRANSITION_DURATION
 
 # Som de notificação
 [ -f ~/.config/sound/Message.mp3 ] && paplay ~/.config/sound/Message.mp3 &
@@ -77,3 +83,7 @@ caelestia wallpaper -f "$downloadPath"
 # Notificação
 notify-send "✨ Wallpaper aplicado!" "Konachan ($RATING)"
 
+# Comentários:
+# safe         → Imagens seguras para todos os públicos
+# questionable → Sugestivas, sem nudez explícita
+# explicit     → Conteúdo adulto/nudez
