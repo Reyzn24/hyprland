@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+clear
+
 set -e
 
 # ------------------------
