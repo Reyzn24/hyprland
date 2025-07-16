@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "#---------------------------------------------------------------#"
-echo "# Configurando tema e tamanho do cursor no sistema        ...   #"
-echo "#---------------------------------------------------------------#"
+echo "#--------------------------------------------------#"
+echo "# Configurando tema e tamanho do cursor no sistema #"
+echo "#--------------------------------------------------#"
 
 CURSOR_DIRS=("/usr/share/icons" "$HOME/.icons")
 
