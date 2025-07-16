@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 echo "#--------------------------------------------------#"
 echo "# Configurando tema e tamanho do cursor no sistema #"
 echo "#--------------------------------------------------#"
